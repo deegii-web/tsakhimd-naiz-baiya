@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Блог — Цахимд Найз Байя</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--teal:#2bbfa4;--teal-dark:#1fa08a;--orange:#f47c3c;--blue:#4a90d9;--purple:#7c5cbf;--light-bg:#f0faf8;--white:#fff;--text:#2d3436;--muted:#636e72;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Nunito',sans-serif;background:var(--light-bg);color:var(--text);}
+
+    nav{background:var(--white);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:70px;box-shadow:0 2px 20px rgba(0,0,0,.06);position:sticky;top:0;z-index:100;}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--teal),var(--blue));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+    .nav-logo-text{font-family:'Fredoka One',cursive;font-size:18px;color:var(--teal-dark);line-height:1.1;}
+    .nav-logo-text span{display:block;font-size:11px;color:var(--muted);font-family:'Nunito',sans-serif;font-weight:600;}
+    .nav-links{display:flex;gap:6px;list-style:none;}
+    .nav-links a{text-decoration:none;color:var(--muted);font-weight:700;font-size:13px;padding:8px 14px;border-radius:10px;transition:all .2s;}
+    .nav-links a:hover,.nav-links a.active{background:var(--teal);color:white;}
+    .btn-join{background:var(--orange);color:white;border:none;padding:10px 20px;border-radius:12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;cursor:pointer;}
+
+    .page-hero{background:linear-gradient(135deg,#2c5282 0%,#4a90d9 100%);padding:60px 80px;color:white;display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px;position:relative;overflow:hidden;}
+    .page-hero::before{content:'';position:absolute;width:400px;height:400px;background:rgba(255,255,255,.07);border-radius:50%;top:-150px;right:-100px;}
+    .hero-tag{display:inline-block;background:rgba(255,255,255,.2);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+    .page-hero h1{font-family:'Fredoka One',cursive;font-size:48px;margin-bottom:14px;}
+    .page-hero p{font-size:16px;opacity:.85;line-height:1.7;max-width:500px;}
+    .hero-icon-big{font-size:100px;animation:float 4s ease-in-out infinite;}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+    .content{padding:50px 80px;}
+
+    /* FEATURED */
+    .featured{background:white;border-radius:28px;padding:36px;margin-bottom:40px;box-shadow:0 4px 24px rgba(0,0,0,.07);display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;}
+    .featured-thumb{height:260px;background:linear-gradient(135deg,var(--teal),var(--blue));border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:80px;}
+    .featured-tag{display:inline-block;background:rgba(43,191,164,.12);color:var(--teal-dark);padding:4px 12px;border-radius:8px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+    .featured h2{font-family:'Fredoka One',cursive;font-size:28px;margin-bottom:12px;line-height:1.3;}
+    .featured p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+    .featured-meta{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .author-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue));display:flex;align-items:center;justify-content:center;font-size:16px;}
+    .author-info{font-size:12px;}
+    .author-name{font-weight:800;display:block;}
+    .author-date{color:var(--muted);}
+    .read-btn{background:var(--teal);color:white;border:none;padding:11px 22px;border-radius:12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;cursor:pointer;transition:all .2s;}
+    .read-btn:hover{background:var(--teal-dark);transform:translateY(-2px);}
+
+    /* FILTER */
+    .filter-row{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+    .filter-btn{padding:8px 18px;border-radius:20px;border:2px solid #e8e8e8;background:white;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s;}
+    .filter-btn:hover,.filter-btn.active{border-color:var(--teal);color:var(--teal);background:rgba(43,191,164,.06);}
+
+    /* GRID */
+    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:50px;}
+    .blog-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.06);transition:all .25s;cursor:pointer;}
+    .blog-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.1);}
+    .blog-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:56px;}
+    .blog-thumb.t1{background:linear-gradient(135deg,#e8faf7,#c8f0ea);}
+    .blog-thumb.t2{background:linear-gradient(135deg,#fff3e8,#ffe0c4);}
+    .blog-thumb.t3{background:linear-gradient(135deg,#f0ecff,#ddd5f8);}
+    .blog-thumb.t4{background:linear-gradient(135deg,#e8f4ff,#c8dff8);}
+    .blog-thumb.t5{background:linear-gradient(135deg,#fff8e8,#ffecc4);}
+    .blog-thumb.t6{background:linear-gradient(135deg,#ffe8f0,#f8c8d8);}
+    .blog-body{padding:20px;}
+    .blog-tag{display:inline-block;padding:3px 10px;border-radius:8px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+    .blog-tag.safety{background:rgba(43,191,164,.12);color:var(--teal-dark);}
+    .blog-tag.story{background:rgba(244,124,60,.12);color:var(--orange);}
+    .blog-tag.tips{background:rgba(124,92,191,.12);color:var(--purple);}
+    .blog-tag.news{background:rgba(74,144,217,.12);color:var(--blue);}
+    .blog-card h3{font-family:'Fredoka One',cursive;font-size:17px;margin-bottom:8px;line-height:1.3;}
+    .blog-card p{font-size:12px;color:var(--muted);line-height:1.6;}
+    .blog-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid #f0f0f0;}
+    .blog-author{font-size:11px;font-weight:700;color:var(--muted);}
+    .blog-likes{font-size:12px;font-weight:800;color:var(--orange);}
+
+    /* WRITE */
+    .write-section{background:linear-gradient(135deg,#fff8f0,#fff3e8);border-radius:28px;padding:40px;margin-bottom:40px;}
+    .write-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+    .write-full{grid-column:1/-1;}
+    .write-input,.write-select,.write-textarea{background:white;border:2px solid #ebebeb;border-radius:12px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s;width:100%;}
+    .write-input:focus,.write-select:focus,.write-textarea:focus{border-color:var(--orange);}
+    .write-textarea{resize:vertical;min-height:120px;}
+    .write-btn{background:linear-gradient(135deg,var(--orange),#ff9a5c);color:white;border:none;padding:13px 28px;border-radius:12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;cursor:pointer;transition:all .2s;}
+    .write-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(244,124,60,.3);}
+
+    /* MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px;}
+    .modal-overlay.open{display:flex;}
+    .modal{background:white;border-radius:28px;width:100%;max-width:680px;max-height:88vh;overflow-y:auto;animation:slideUp .3s ease;}
+    @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .modal-header{padding:28px 32px 0;display:flex;justify-content:space-between;align-items:flex-start;}
+    .modal-close{background:#f0f0f0;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;}
+    .modal-hero{height:180px;display:flex;align-items:center;justify-content:center;font-size:72px;margin:20px 32px;border-radius:20px;}
+    .modal-body{padding:0 32px 32px;}
+    .modal-body h2{font-family:'Fredoka One',cursive;font-size:26px;margin-bottom:14px;}
+    .modal-body p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:12px;}
+    .modal-meta{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+    .modal-author{font-size:13px;font-weight:800;}
+    .modal-date{font-size:12px;color:var(--muted);}
+    .like-btn{background:rgba(244,124,60,.1);border:none;padding:8px 16px;border-radius:10px;color:var(--orange);font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;cursor:pointer;transition:all .2s;margin-left:auto;}
+    .like-btn:hover{background:rgba(244,124,60,.2);}
+
+    /* AI SUMMARY */
+    .ai-summary{background:#f0faf8;border-radius:16px;padding:18px 20px;margin:20px 0;border-left:4px solid var(--teal);}
+    .ai-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+    .ai-text{font-size:13px;color:var(--text);line-height:1.6;}
+    .ai-btn{background:var(--teal);color:white;border:none;padding:8px 16px;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;margin-top:10px;}
+
+    footer{background:#1a1a2e;color:white;padding:30px 80px;text-align:center;font-size:13px;color:rgba(255,255,255,.5);margin-top:60px;}
+    footer a{color:var(--teal);text-decoration:none;}
+
+    @media(max-width:768px){
+      .page-hero{padding:40px 24px;grid-template-columns:1fr;}
+      .hero-icon-big{display:none;}
+      .content{padding:30px 20px;}
+      .featured{grid-template-columns:1fr;}
+      .blog-grid{grid-template-columns:1fr;}
+      .write-form{grid-template-columns:1fr;}
+      nav{padding:0 20px;}
+      .nav-links{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">🤝</div>
+    <div class="nav-logo-text">Цахимд Найз Байя<span>Web-based Capstone Project</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Нүүр</a></li>
+    <li><a href="/learn">Мэдлэг</a></li>
+    <li><a href="/bullying">Кибер дээрэлхлэлт</a></li>
+    <li><a href="/action">Хамтдаа чадна</a></li>
+    <li><a href="/blog" class="active">Блог</a></li>
+  </ul>
+  <button class="btn-join">Бүртгүүлэх</button>
+</nav>
+
+<div class="page-hero">
+  <div>
+    <div class="hero-tag">📝 БЛОГ</div>
+    <h1>Нийгэмлэгийн<br>Блог</h1>
+    <p>Туршлага, зөвлөгөө, сонирхолтой нийтлэлүүдийг уншиж, өөрийн нийтлэл бичээрэй!</p>
+  </div>
+  <div class="hero-icon-big">✍️</div>
+</div>
+
+<div class="content">
+
+  <!-- FEATURED -->
+  <div class="featured">
+    <div class="featured-thumb">🌟</div>
+    <div>
+      <span class="featured-tag">⭐ Онцлох нийтлэл</span>
+      <h2>Кибер дээрэлхлэлтэд өртсөн минь — миний түүх</h2>
+      <p>8-р ангид байхдаа би онлайн дарамтанд өртсөн. Тэр хэцүү үед хэрхэн даван туулсан, юу сурсан талаараа хуваалцахыг хүссэн...</p>
+      <div class="featured-meta">
+        <div class="author-avatar">👧</div>
+        <div class="author-info">
+          <span class="author-name">Болормаа Д.</span>
+          <span class="author-date">2026 оны 5-р сар 10</span>
+        </div>
+      </div>
+      <button class="read-btn" onclick="openPost(0)">📖 Унших</button>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterPosts('all',this)">Бүгд</button>
+    <button class="filter-btn" onclick="filterPosts('safety',this)">🛡️ Аюулгүй байдал</button>
+    <button class="filter-btn" onclick="filterPosts('story',this)">💬 Түүх</button>
+    <button class="filter-btn" onclick="filterPosts('tips',this)">💡 Зөвлөгөө</button>
+    <button class="filter-btn" onclick="filterPosts('news',this)">📰 Мэдээ</button>
+  </div>
+
+  <!-- BLOG GRID -->
+  <div class="blog-grid" id="blogGrid">
+    <div class="blog-card" data-cat="safety" onclick="openPost(1)">
+      <div class="blog-thumb t1">🔐</div>
+      <div class="blog-body">
+        <span class="blog-tag safety">Аюулгүй байдал</span>
+        <h3>Нууц үгийг хэрхэн зөв удирдах вэ?</h3>
+        <p>Нууц үг менежер ашиглах, хүчтэй нууц үг үүсгэх арга техникүүд...</p>
+        <div class="blog-footer"><span class="blog-author">👤 Тэмүүлэн</span><span class="blog-likes">❤️ 47</span></div>
+      </div>
+    </div>
+    <div class="blog-card" data-cat="story" onclick="openPost(2)">
+      <div class="blog-thumb t2">💪</div>
+      <div class="blog-body">
+        <span class="blog-tag story">Түүх</span>
+        <h3>Найзаа хэрхэн аварсан тухай</h3>
+        <p>Найз маань дарамтанд өртсөн тэр үед би яаж тусалсан бэ...</p>
+        <div class="blog-footer"><span class="blog-author">👤 Номин</span><span class="blog-likes">❤️ 63</span></div>
+      </div>
+    </div>
+    <div class="blog-card" data-cat="tips" onclick="openPost(3)">
+      <div class="blog-thumb t3">📱</div>
+      <div class="blog-body">
+        <span class="blog-tag tips">Зөвлөгөө</span>
+        <h3>TikTok-д аюулгүй байх 10 арга</h3>
+        <p>TikTok хэрэглэхдээ хувийн мэдээллээ хэрхэн хамгаалах вэ...</p>
+        <div class="blog-footer"><span class="blog-author">👤 Оюунцэцэг</span><span class="blog-likes">❤️ 89</span></div>
+      </div>
+    </div>
+    <div class="blog-card" data-cat="news" onclick="openPost(4)">
+      <div class="blog-thumb t4">📰</div>
+      <div class="blog-body">
+        <span class="blog-tag news">Мэдээ</span>
+        <h3>Монголд кибер дээрэлхлэлтийн статистик</h3>
+        <p>2025 оны судалгааны үр дүнд Монголын хүүхдийн 34% нь...</p>
+        <div class="blog-footer"><span class="blog-author">👤 Батбаяр</span><span class="blog-likes">❤️ 34</span></div>
+      </div>
+    </div>
+    <div class="blog-card" data-cat="tips" onclick="openPost(5)">
+      <div class="blog-thumb t5">🧠</div>
+      <div class="blog-body">
+        <span class="blog-tag tips">Зөвлөгөө</span>
+        <h3>Сэтгэл зүйн дарамтаас сэргийлэх арга</h3>
+        <p>Онлайн дарамт сэтгэл зүйд хэрхэн нөлөөлдөг, хэрхэн хамгаалах вэ...</p>
+        <div class="blog-footer"><span class="blog-author">👤 Болормаа</span><span class="blog-likes">❤️ 52</span></div>
+      </div>
+    </div>
+    <div class="blog-card" data-cat="safety" onclick="openPost(6)">
+      <div class="blog-thumb t6">🌐</div>
+      <div class="blog-body">
+        <span class="blog-tag safety">Аюулгүй байдал</span>
+        <h3>VPN гэж юу вэ, хэрэглэх хэрэгтэй юу?</h3>
+        <p>VPN-ийн тухай, хэрэглэгчийн нууцлалыг хэрхэн хамгаалдаг талаар...</p>
+        <div class="blog-footer"><span class="blog-author">👤 Тэмүүлэн</span><span class="blog-likes">❤️ 28</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WRITE -->
+  <div class="write-section">
+    <div class="section-tag" style="background:rgba(244,124,60,.12);color:var(--orange);">НИЙТЛЭЛ БИЧИХ</div>
+    <h2 class="section-title">Өөрийн нийтлэл бич!</h2>
+    <p class="section-desc">Туршлага, зөвлөгөө, түүхээ хуваалц. Таны нийтлэл бусдад тусалж болно!</p>
+    <div class="write-form">
+      <input class="write-input" id="postTitle" placeholder="Нийтлэлийн гарчиг..."/>
+      <select class="write-select" id="postCat">
+        <option value="">Ангилал сонгох...</option>
+        <option>Аюулгүй байдал</option>
+        <option>Түүх</option>
+        <option>Зөвлөгөө</option>
+        <option>Мэдээ</option>
+      </select>
+      <input class="write-input" id="postAuthor" placeholder="Таны нэр..."/>
+      <div></div>
+      <textarea class="write-textarea write-full" id="postContent" placeholder="Нийтлэлийн агуулга..."></textarea>
+      <div class="write-full" style="display:flex;gap:12px;align-items:center;">
+        <button class="write-btn" onclick="submitPost()">📨 Нийтлэх</button>
+        <span id="writeMsg" style="font-size:13px;color:var(--teal);font-weight:700;display:none">✅ Нийтлэл амжилттай нийтлэгдлээ!</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div></div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-hero" id="modalHero"></div>
+    <div class="modal-body">
+      <div class="modal-meta">
+        <div class="author-avatar" id="modalAvatar"></div>
+        <div>
+          <div class="modal-author" id="modalAuthor"></div>
+          <div class="modal-date" id="modalDate"></div>
+        </div>
+        <button class="like-btn" onclick="likePost(this)">❤️ Таалагдлаа</button>
+      </div>
+      <h2 id="modalTitle"></h2>
+      <div id="modalContent"></div>
+      <div class="ai-summary">
+        <div class="ai-label">✦ AI хураангуй</div>
+        <div class="ai-text" id="aiSummary">Нийтлэлийн товч хураангуйг авахын тулд доорх товчийг дарна уу.</div>
+        <button class="ai-btn" onclick="getAISummary()" id="aiBtn">✦ AI-аар хураангуйлах</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/">← Нүүр хуудас руу буцах</a> &nbsp;|&nbsp; © 2026 Цахимд Найз Байя
+</footer>
+
+<script>
+  const posts = [
+    { emoji:'🌟', author:'👧', name:'Болормаа Д.', date:'2026.05.10', title:'Кибер дээрэлхлэлтэд өртсөн минь — миний түүх', content:`<p>8-р ангид байхдаа би онлайн дарамтанд өртсөн. Нэг бүлэг хүмүүс миний зургийг зөвшөөрөлгүй тарааж, хорт сэтгэгдэл бичиж эхэлсэн.</p><p>Тэр үед би маш их гунигласан. Сургуульд явах дургүй болж, найзуудаасаа холдсон. Нэг сарын турш ганцаараа тэвчсэн.</p><p>Гэтэл нэг өдөр эмээдээ хэлсэн. Эмээ маань маш их дэмжсэн, сургуулийн багшид мэдэгдэхэд тусалсан. Тэр л минь эргэлт болсон.</p><p><strong>Хэзээ ч ганцаараа тэвчихгүй байгаарай. Тусламж хүсэх нь хамгийн зоригтой үйлдэл!</strong></p>` },
+    { emoji:'🔐', author:'👦', name:'Тэмүүлэн', date:'2026.05.08', title:'Нууц үгийг хэрхэн зөв удирдах вэ?', content:`<p>Олон хүн нэг нууц үгийг бүх платформд ашигладаг. Энэ нь маш аюултай!</p><p>Нэг платформ хакерт орвол бүх аккаунт чинь задарна. Тиймээс платформ бүрт өөр нууц үг ашигла.</p><p><strong>Зөвлөгөө:</strong> Bitwarden гэх үнэгүй password manager ашигла. Бүх нууц үгийг аюулгүй хадгалж, автоматаар бөглөдөг.</p>` },
+    { emoji:'💪', author:'👧', name:'Номин', date:'2026.05.06', title:'Найзаа хэрхэн аварсан тухай', content:`<p>Найз маань Discord-д байнга хорт мессеж авч байсан. Надад хэлэхдээ нулимслаж байсан.</p><p>Би тэр дор нь тусалсан: скриншот авч, Discord-д report хийж, хамт эцэг эхэд нь хэлсэн. Хэдхэн өдрийн дотор аккаунт нь хориглогдсон.</p><p>Найзынхаа хажууд байгаарай. Сонсох, дэмжих нь хамгийн чухал тусламж!</p>` },
+    { emoji:'📱', author:'👩', name:'Оюунцэцэг', date:'2026.05.04', title:'TikTok-д аюулгүй байх 10 арга', content:`<p>1. Аккаунтаа private болго<br>2. Танихгүй хүний DM-ийг хязгаарла<br>3. Байршлаа хэзээ ч нийтлэх хэрэггүй<br>4. Дуурайсан аккаунтаас болгоомжил<br>5. Report товчийг идэвхтэй ашигла<br>6. Стресс авбал апп-аа тавь<br>7. Хорт сэтгэгдэлд хариу өгөхгүй байгаарай<br>8. Итгэдэг хүнтэйгээ мэдээлэл хуваалц<br>9. Хоёр шатлалт баталгаажуулалт асаа<br>10. Тогтмол privacy тохиргоогоо шалга</p>` },
+    { emoji:'📊', author:'👨', name:'Батбаяр', date:'2026.05.02', title:'Монголд кибер дээрэлхлэлтийн статистик', content:`<p>2025 оны судалгаагаар Монгол улсын 10-17 насны хүүхдийн 34% нь кибер дээрэлхлэлтэд өртсөн байна.</p><p>Үүнээс зөвхөн 12% нь насанд хүрэгчдэд мэдэгдсэн байна. Ихэнх хүүхэд ичиж, айж, мэдэгддэггүй.</p><p>Энэ тоог багасгахад бид бүгд хувь нэмрээ оруулах боломжтой!</p>` },
+    { emoji:'🧠', author:'👧', name:'Болормаа', date:'2026.04.28', title:'Сэтгэл зүйн дарамтаас сэргийлэх арга', content:`<p>Кибер дарамт сэтгэл зүйд ноцтой нөлөө үзүүлдэг. Нойр муудах, хоол идэхгүй болох, сургуульд явахгүй болох зэрэг шинж тэмдэг гарч болно.</p><p>Сэтгэл зүйгээ хамгаалах арга: хорт зүйл харахаа болих, найзуудтайгаа илүү их цаг өнгөрүүл, биеийн тамир хийж ойн агаарт гар.</p>` },
+    { emoji:'🌐', author:'👦', name:'Тэмүүлэн', date:'2026.04.25', title:'VPN гэж юу вэ, хэрэглэх хэрэгтэй юу?', content:`<p>VPN (Virtual Private Network) нь таны интернет холболтыг шифрлэж, IP хаягийг нуудаг технологи.</p><p>Хэрэглэх тохиолдол: нийтийн wifi ашиглах, нууцлал хамгаалах. Хүүхдэд ерөнхийдөө VPN шаардлагагүй, харин аюулгүй, найдвартай wifi ашиглах нь чухал.</p>` }
+  ];
+
+  let currentPost = 0;
+
+  function openPost(idx) {
+    currentPost = idx;
+    const p = posts[idx];
+    document.getElementById('modalHero').textContent = p.emoji;
+    document.getElementById('modalHero').style.background = `linear-gradient(135deg, var(--teal), var(--blue))`;
+    document.getElementById('modalAvatar').textContent = p.author;
+    document.getElementById('modalAuthor').textContent = p.name;
+    document.getElementById('modalDate').textContent = p.date;
+    document.getElementById('modalTitle').textContent = p.title;
+    document.getElementById('modalContent').innerHTML = p.content;
+    document.getElementById('aiSummary').textContent = 'Нийтлэлийн товч хураангуйг авахын тулд доорх товчийг дарна уу.';
+    document.getElementById('aiBtn').style.display = 'block';
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+
+  async function getAISummary() {
+    const p = posts[currentPost];
+    const btn = document.getElementById('aiBtn');
+    const txt = document.getElementById('aiSummary');
+    btn.textContent = '⏳ Хураангуйлж байна...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          messages: [{role:'user', content:`Дараах блог нийтлэлийг 2-3 өгүүлбэрт хураангуйл. Монгол хэлээр бич.\n\nГарчиг: ${p.title}\nАгуулга: ${p.content.replace(/<[^>]*>/g,'')}`}]
+        })
+      });
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let result = '';
+      txt.textContent = '';
+
+      while (true) {
+        const {done, value} = await reader.read();
+        if (done) break;
+        const lines = decoder.decode(value).split('\n');
+        for (const line of lines) {
+          if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+            try { result += JSON.parse(line.slice(6)).text; txt.textContent = result; } catch {}
+          }
+        }
+      }
+      btn.style.display = 'none';
+    } catch {
+      txt.textContent = 'Алдаа гарлаа. Дахин оролдоно уу.';
+      btn.textContent = '✦ AI-аар хураангуйлах';
+      btn.disabled = false;
+    }
+  }
+
+  function likePost(btn) {
+    btn.textContent = '❤️ Таалагдлаа!';
+    btn.style.background = 'rgba(244,124,60,.25)';
+    btn.disabled = true;
+  }
+
+  function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
+  function closeModalDirect() { document.getElementById('modalOverlay').classList.remove('open'); }
+
+  function filterPosts(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.blog-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+    });
+  }
+
+  function submitPost() {
+    const title = document.getElementById('postTitle').value.trim();
+    const content = document.getElementById('postContent').value.trim();
+    const author = document.getElementById('postAuthor').value.trim();
+    if (!title || !content || !author) { alert('Бүх талбарыг бөглөнө үү!'); return; }
+    const msg = document.getElementById('writeMsg');
+    msg.style.display = 'inline';
+    document.getElementById('postTitle').value = '';
+    document.getElementById('postContent').value = '';
+    document.getElementById('postAuthor').value = '';
+    setTimeout(() => msg.style.display = 'none', 4000);
+  }
+</script>
+</body>
+</html>

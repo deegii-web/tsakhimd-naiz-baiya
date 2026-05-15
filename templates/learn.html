@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Мэдлэг — Цахимд Найз Байя</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --teal: #2bbfa4;
+      --teal-dark: #1fa08a;
+      --orange: #f47c3c;
+      --orange-light: #ff9a5c;
+      --yellow: #ffd166;
+      --blue: #4a90d9;
+      --purple: #7c5cbf;
+      --light-bg: #f0faf8;
+      --white: #ffffff;
+      --text: #2d3436;
+      --muted: #636e72;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--light-bg);
+      color: var(--text);
+    }
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--teal), var(--blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+    .nav-logo-text { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--teal-dark); line-height: 1.1; }
+    .nav-logo-text span { display: block; font-size: 11px; color: var(--muted); font-family: 'Nunito', sans-serif; font-weight: 600; }
+    .nav-links { display: flex; gap: 6px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-weight: 700; font-size: 13px; padding: 8px 14px; border-radius: 10px; transition: all .2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--teal); color: white; }
+    .btn-join { background: var(--orange); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; cursor: pointer; }
+
+    /* HERO */
+    .page-hero {
+      background: linear-gradient(135deg, #1fa08a 0%, #4a90d9 100%);
+      padding: 60px 80px;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,.06);
+      border-radius: 50%;
+      top: -150px; right: -100px;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,.05);
+      border-radius: 50%;
+      bottom: -80px; left: 200px;
+    }
+    .hero-tag { display: inline-block; background: rgba(255,255,255,.2); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .page-hero h1 { font-family: 'Fredoka One', cursive; font-size: 48px; margin-bottom: 14px; }
+    .page-hero p { font-size: 16px; opacity: .85; line-height: 1.7; max-width: 500px; }
+    .hero-icon-big { font-size: 100px; position: relative; z-index: 2; animation: float 4s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    /* PROGRESS */
+    .progress-bar-wrap {
+      background: white;
+      padding: 20px 80px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    }
+    .progress-label { font-size: 13px; font-weight: 800; color: var(--muted); white-space: nowrap; }
+    .progress-track { flex: 1; height: 10px; background: #e8f8f5; border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--blue)); border-radius: 10px; width: 0%; transition: width 1s ease; }
+    .progress-pct { font-size: 14px; font-weight: 900; color: var(--teal); white-space: nowrap; }
+
+    /* TABS */
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      background: white;
+      border-bottom: 2px solid #f0f0f0;
+      padding: 0 80px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 16px 24px;
+      border: none;
+      background: transparent;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all .2s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn:hover { color: var(--teal); }
+    .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+    /* CONTENT */
+    .content { padding: 50px 80px; }
+
+    .tab-panel { display: none; animation: fadeIn .3s ease; }
+    .tab-panel.active { display: block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    /* LESSON CARDS */
+    .lessons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+
+    .lesson-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      transition: all .25s;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .lesson-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.1); }
+    .lesson-card.done { border-color: var(--teal); }
+
+    .lesson-thumb {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      position: relative;
+    }
+    .lesson-thumb.t1 { background: linear-gradient(135deg, #e8faf7, #c8f0ea); }
+    .lesson-thumb.t2 { background: linear-gradient(135deg, #fff3e8, #ffe0c4); }
+    .lesson-thumb.t3 { background: linear-gradient(135deg, #f0ecff, #ddd5f8); }
+    .lesson-thumb.t4 { background: linear-gradient(135deg, #e8f4ff, #c8dff8); }
+    .lesson-thumb.t5 { background: linear-gradient(135deg, #fff8e8, #ffecc4); }
+    .lesson-thumb.t6 { background: linear-gradient(135deg, #ffe8f0, #f8c8d8); }
+
+    .done-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: var(--teal);
+      color: white;
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      display: none;
+    }
+    .lesson-card.done .done-badge { display: block; }
+
+    .lesson-body { padding: 20px; }
+    .lesson-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .lesson-tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 10px; }
+    .lesson-tag.beginner { background: rgba(43,191,164,.12); color: var(--teal-dark); }
+    .lesson-tag.mid     { background: rgba(244,124,60,.12); color: var(--orange); }
+    .lesson-tag.adv     { background: rgba(124,92,191,.12); color: var(--purple); }
+    .lesson-min { font-size: 11px; color: var(--muted); font-weight: 600; margin-left: auto; }
+    .lesson-body h3 { font-family: 'Fredoka One', cursive; font-size: 18px; margin-bottom: 6px; }
+    .lesson-body p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .lesson-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; }
+    .lesson-points { font-size: 12px; font-weight: 800; color: var(--yellow); }
+    .lesson-btn {
+      background: var(--teal);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .lesson-btn:hover { background: var(--teal-dark); }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: white;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 85vh;
+      overflow-y: auto;
+      animation: slideUp .3s ease;
+    }
+    @keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
+    .modal-header { padding: 28px 32px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+    .modal-header h2 { font-family: 'Fredoka One', cursive; font-size: 24px; }
+    .modal-close { background: #f0f0f0; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+    .modal-body { padding: 20px 32px 32px; }
+    .modal-body p { font-size: 14px; line-height: 1.8; color: var(--muted); margin-bottom: 16px; }
+    .modal-body h4 { font-family: 'Fredoka One', cursive; font-size: 17px; margin: 20px 0 10px; color: var(--text); }
+    .tip-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .tip-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.6; font-weight: 600; }
+    .tip-icon { font-size: 18px; flex-shrink: 0; }
+    .modal-done-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: all .2s;
+    }
+    .modal-done-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(43,191,164,.3); }
+
+    /* TIPS SECTION */
+    .tips-section { margin-top: 40px; }
+    .tips-title { font-family: 'Fredoka One', cursive; font-size: 28px; margin-bottom: 24px; }
+    .tips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .tip-card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      box-shadow: 0 4px 16px rgba(0,0,0,.05);
+      transition: transform .2s;
+    }
+    .tip-card:hover { transform: translateY(-3px); }
+    .tip-card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .tip-card-icon.g1 { background: rgba(43,191,164,.12); }
+    .tip-card-icon.g2 { background: rgba(244,124,60,.12); }
+    .tip-card-icon.g3 { background: rgba(124,92,191,.12); }
+    .tip-card-icon.g4 { background: rgba(74,144,217,.12); }
+    .tip-card h4 { font-family: 'Fredoka One', cursive; font-size: 16px; margin-bottom: 6px; }
+    .tip-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* QUIZ TAB */
+    .quiz-wrap { max-width: 600px; margin: 0 auto; }
+    .quiz-card {
+      background: white;
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.08);
+    }
+    .quiz-progress { display: flex; gap: 8px; margin-bottom: 28px; }
+    .qp-dot { flex: 1; height: 6px; border-radius: 6px; background: #e8e8e8; transition: background .3s; }
+    .qp-dot.done { background: var(--teal); }
+    .qp-dot.current { background: var(--orange); }
+    .quiz-q { font-family: 'Fredoka One', cursive; font-size: 22px; margin-bottom: 24px; line-height: 1.4; }
+    .quiz-opts { display: flex; flex-direction: column; gap: 12px; }
+    .quiz-opt {
+      padding: 14px 18px;
+      border: 2px solid #f0f0f0;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .quiz-opt:hover { border-color: var(--teal); background: rgba(43,191,164,.04); }
+    .quiz-opt.correct { border-color: var(--teal); background: rgba(43,191,164,.1); color: var(--teal-dark); }
+    .quiz-opt.wrong   { border-color: #e05c5c; background: rgba(224,92,92,.1); color: #e05c5c; }
+    .quiz-opt-letter { width: 28px; height: 28px; border-radius: 8px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; }
+    .quiz-feedback { margin-top: 16px; padding: 14px 18px; border-radius: 14px; font-size: 13px; font-weight: 700; display: none; }
+    .quiz-feedback.correct { background: rgba(43,191,164,.1); color: var(--teal-dark); display: block; }
+    .quiz-feedback.wrong   { background: rgba(224,92,92,.1); color: #e05c5c; display: block; }
+    .quiz-next {
+      width: 100%;
+      background: var(--teal);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 20px;
+      display: none;
+      transition: all .2s;
+    }
+    .quiz-next:hover { background: var(--teal-dark); }
+    .quiz-result { text-align: center; display: none; }
+    .quiz-result.show { display: block; }
+    .score-circle { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--blue)); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; }
+    .score-num { font-family: 'Fredoka One', cursive; font-size: 36px; line-height: 1; }
+    .score-label { font-size: 12px; font-weight: 700; opacity: .85; }
+
+    /* GLOSSARY */
+    .glossary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .gloss-card { background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(0,0,0,.05); }
+    .gloss-term { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--teal); margin-bottom: 6px; }
+    .gloss-def { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .gloss-tag { display: inline-block; background: rgba(43,191,164,.1); color: var(--teal-dark); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-top: 8px; }
+
+    /* FOOTER */
+    footer { background: #1a1a2e; color: white; padding: 30px 80px; text-align: center; font-size: 13px; color: rgba(255,255,255,.5); }
+    footer a { color: var(--teal); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 40px 24px; grid-template-columns: 1fr; }
+      .hero-icon-big { display: none; }
+      .tab-nav { padding: 0 20px; }
+      .content { padding: 30px 20px; }
+      .lessons-grid { grid-template-columns: 1fr; }
+      .tips-grid { grid-template-columns: 1fr; }
+      .glossary-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .progress-bar-wrap { padding: 16px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">🤝</div>
+    <div class="nav-logo-text">Цахимд Найз Байя<span>Web-based Capstone Project</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Нүүр</a></li>
+    <li><a href="/learn" class="active">Мэдлэг</a></li>
+    <li><a href="/bullying">Кибер дээрэлхлэлт</a></li>
+    <li><a href="/action">Хамтдаа чадна</a></li>
+    <li><a href="/blog">Блог</a></li>
+  </ul>
+  <button class="btn-join">Бүртгүүлэх</button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div>
+    <div class="hero-tag">📚 МЭДЛЭГ</div>
+    <h1>Аюулгүй байх<br>мэдлэг олж ав</h1>
+    <p>Хичээлүүдийг дуусгаж, тест өгч, кибер аюулгүй байдлын мэдлэгтэй болоорой!</p>
+  </div>
+  <div class="hero-icon-big">📖</div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar-wrap">
+  <span class="progress-label">Таны явц:</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<!-- TABS -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('lessons', this)">📚 Хичээлүүд</button>
+  <button class="tab-btn" onclick="switchTab('tips', this)">💡 Зөвлөгөө</button>
+  <button class="tab-btn" onclick="switchTab('quiz', this)">🧠 Тест</button>
+  <button class="tab-btn" onclick="switchTab('glossary', this)">📖 Толь бичиг</button>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- LESSONS TAB -->
+  <div class="tab-panel active" id="tab-lessons">
+    <div class="lessons-grid">
+
+      <div class="lesson-card" id="card-0" onclick="openLesson(0)">
+        <div class="lesson-thumb t1"><span>🔐</span><div class="done-badge">✓ Дууссан</div></div>
+        <div class="lesson-body">
+          <div class="lesson-meta">
+            <span class="lesson-tag beginner">Анхан</span>
+            <span class="lesson-min">⏱ 5 мин</span>
+          </div>
+          <h3>Нууц үг аюулгүй байдал</h3>
+          <p>Хүчтэй нууц үг хэрхэн үүсгэх, хаана хадгалах талаар суралцана.</p>
+          <div class="lesson-footer">
+            <span class="lesson-points">⭐ 50 оноо</span>
+            <button class="lesson-btn">Эхлэх →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-card" id="card-1" onclick="openLesson(1)">
+        <div class="lesson-thumb t2"><span>🎣</span><div class="done-badge">✓ Дууссан</div></div>
+        <div class="lesson-body">
+          <div class="lesson-meta">
+            <span class="lesson-tag beginner">Анхан</span>
+            <span class="lesson-min">⏱ 7 мин</span>
+          </div>
+          <h3>Фишинг гэж юу вэ?</h3>
+          <p>Хуурамч мессеж, имэйлийг хэрхэн таних талаар суралцана.</p>
+          <div class="lesson-footer">
+            <span class="lesson-points">⭐ 60 оноо</span>
+            <button class="lesson-btn">Эхлэх →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-card" id="card-2" onclick="openLesson(2)">
+        <div class="lesson-thumb t3"><span>🕵️</span><div class="done-badge">✓ Дууссан</div></div>
+        <div class="lesson-body">
+          <div class="lesson-meta">
+            <span class="lesson-tag mid">Дунд</span>
+            <span class="lesson-min">⏱ 8 мин</span>
+          </div>
+          <h3>Хувийн мэдээлэл хамгаалах</h3>
+          <p>Цахимд хэний ч мэдэх ёсгүй мэдээллийг хэрхэн хамгаалах вэ?</p>
+          <div class="lesson-footer">
+            <span class="lesson-points">⭐ 70 оноо</span>
+            <button class="lesson-btn">Эхлэх →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-card" id="card-3" onclick="openLesson(3)">
+        <div class="lesson-thumb t4"><span>💬</span><div class="done-badge">✓ Дууссан</div></div>
+        <div class="lesson-body">
+          <div class="lesson-meta">
+            <span class="lesson-tag mid">Дунд</span>
+            <span class="lesson-min">⏱ 6 мин</span>
+          </div>
+          <h3>Цахим харилцааны дүрэм</h3>
+          <p>Онлайн чатад хэрхэн эелдэг, хариуцлагатай байх вэ?</p>
+          <div class="lesson-footer">
+            <span class="lesson-points">⭐ 60 оноо</span>
+            <button class="lesson-btn">Эхлэх →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-card" id="card-4" onclick="openLesson(4)">
+        <div class="lesson-thumb t5"><span>📱</span><div class="done-badge">✓ Дууссан</div></div>
+        <div class="lesson-body">
+          <div class="lesson-meta">
+            <span class="lesson-tag adv">Ахисан</span>
+            <span class="lesson-min">⏱ 10 мин</span>
+          </div>
+          <h3>Социал медиа аюулгүй байдал</h3>
+          <p>Instagram, TikTok, Facebook-т хэрхэн аюулгүй байх вэ?</p>
+          <div class="lesson-footer">
+            <span class="lesson-points">⭐ 80 оноо</span>
+            <button class="lesson-btn">Эхлэх →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-card" id="card-5" onclick="openLesson(5)">
+        <div class="lesson-thumb t6"><span>🆘</span><div class="done-badge">✓ Дууссан</div></div>
+        <div class="lesson-body">
+          <div class="lesson-meta">
+            <span class="lesson-tag adv">Ахисан</span>
+            <span class="lesson-min">⏱ 9 мин</span>
+          </div>
+          <h3>Тусламж хэрхэн хүсэх вэ?</h3>
+          <p>Аюулд орвол хэнд, яаж мэдэгдэх талаар суралцана.</p>
+          <div class="lesson-footer">
+            <span class="lesson-points">⭐ 90 оноо</span>
+            <button class="lesson-btn">Эхлэх →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIPS TAB -->
+  <div class="tab-panel" id="tab-tips">
+    <div class="tips-section">
+      <h2 class="tips-title">💡 Өдөр тутмын зөвлөгөө</h2>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-card-icon g1">🔐</div>
+          <div>
+            <h4>Нууц үгээ хэнд ч хэлэлгүй</h4>
+            <p>Нууц үгээ найздаа ч гэсэн хэлэх хэрэггүй. Хэн нэгэн нууц үгийг чинь асуувал тэр хүнд итгэж болохгүй.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon g2">🚫</div>
+          <div>
+            <h4>Танихгүй хүнтэй уулзалгүй</h4>
+            <p>Интернетэд танилцсан хүнтэй биечлэн уулзах нь маш аюултай. Насанд хүрсэн хүнд заавал мэдэгд.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon g3">💬</div>
+          <div>
+            <h4>Эелдэг байгаарай</h4>
+            <p>Онлайнд бичдэг зүйлдээ хариуцлагатай байгаарай. Нүүр тулаад хэлж чадахгүй зүйлийг цахимд бичих хэрэггүй.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon g4">📸</div>
+          <div>
+            <h4>Зураг болгоомжтой хуваалц</h4>
+            <p>Нүүрээ харуулсан зураг, байршлаа интернетэд нийтлэхдээ маш болгоомжтой байгаарай.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon g1">🛡️</div>
+          <div>
+            <h4>Privacy тохиргоогоо шалга</h4>
+            <p>Сошиал медиа бүрт privacy тохиргоогоо "зөвхөн найзууд" гэж тохируул.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon g2">🆘</div>
+          <div>
+            <h4>Аюултай санагдвал хэлэ</h4>
+            <p>Ямар нэгэн зүйл таныг санаа зовоож байвал эцэг эх, багшдаа заавал хэлж тусламж хүс.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ TAB -->
+  <div class="tab-panel" id="tab-quiz">
+    <div class="quiz-wrap">
+      <div class="quiz-card">
+        <div id="quizMain">
+          <div class="quiz-progress" id="quizProgress"></div>
+          <div class="quiz-q" id="quizQ"></div>
+          <div class="quiz-opts" id="quizOpts"></div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <button class="quiz-next" id="quizNext" onclick="nextQuestion()">Дараагийн асуулт →</button>
+        </div>
+        <div class="quiz-result" id="quizResult">
+          <div class="score-circle">
+            <div class="score-num" id="scoreNum">0</div>
+            <div class="score-label">оноо</div>
+          </div>
+          <h3 style="font-family:'Fredoka One',cursive;font-size:24px;margin-bottom:10px" id="scoreMsg"></h3>
+          <p style="color:var(--muted);font-size:14px;margin-bottom:24px" id="scoreDesc"></p>
+          <button class="modal-done-btn" onclick="resetQuiz()">🔄 Дахин өгөх</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOSSARY TAB -->
+  <div class="tab-panel" id="tab-glossary">
+    <div class="glossary-grid">
+      <div class="gloss-card">
+        <div class="gloss-term">Кибер дээрэлхлэлт</div>
+        <div class="gloss-def">Цахим орчинд хүнийг дарамталж, гомдоож, хөндлөнгийн оролцоогоор хор хөнөөл учруулах үйлдэл.</div>
+        <span class="gloss-tag">Аюулгүй байдал</span>
+      </div>
+      <div class="gloss-card">
+        <div class="gloss-term">Фишинг</div>
+        <div class="gloss-def">Хуурамч вэбсайт, имэйл, мессежээр хэрэглэгчийн нууц мэдээллийг хулгайлах аргачлал.</div>
+        <span class="gloss-tag">Хакинг</span>
+      </div>
+      <div class="gloss-card">
+        <div class="gloss-term">Privacy тохиргоо</div>
+        <div class="gloss-def">Таны нийгмийн сүлжээн дэх мэдээллийг хэн харах боломжтойг тохируулах тохиргоо.</div>
+        <span class="gloss-tag">Хамгаалалт</span>
+      </div>
+      <div class="gloss-card">
+        <div class="gloss-term">Нийгмийн инженерчлэл</div>
+        <div class="gloss-def">Хүмүүсийг психологийн аргаар хуурч, нууц мэдээлэл гаргуулах арга.</div>
+        <span class="gloss-tag">Хакинг</span>
+      </div>
+      <div class="gloss-card">
+        <div class="gloss-term">Хоёр шатлалт баталгаажуулалт</div>
+        <div class="gloss-def">Нэвтрэхдээ нууц үгнээс гадна нэмэлт баталгаажуулалт (SMS код гэх мэт) шаардах аюулгүй байдлын арга.</div>
+        <span class="gloss-tag">Хамгаалалт</span>
+      </div>
+      <div class="gloss-card">
+        <div class="gloss-term">Скриншот</div>
+        <div class="gloss-def">Дэлгэцийн агуулгыг зургаар хадгалах үйлдэл. Кибер дээрэлхлэлтийн нотолгоо цуглуулахад ашиглана.</div>
+        <span class="gloss-tag">Ерөнхий</span>
+      </div>
+      <div class="gloss-card">
+        <div class="gloss-term">Тролл</div>
+        <div class="gloss-def">Интернетэд бусдыг санаатайгаар бухимдуулах, маргаан үүсгэх зорилгоор хорт сэтгэгдэл бичдэг хүн.</div>
+        <span class="gloss-tag">Аюулгүй байдал</span>
+      </div>
+      <div class="gloss-card">
+        <div class="gloss-term">Цахим мөр</div>
+        <div class="gloss-def">Та интернет ашиглахдаа үлдээдэг бүх мэдээлэл, үйлдлийн тэмдэглэл.</div>
+        <span class="gloss-tag">Ерөнхий</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LESSON MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle"></h2>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<footer>
+  <a href="/">← Нүүр хуудас руу буцах</a> &nbsp;|&nbsp; © 2026 Цахимд Найз Байя
+</footer>
+
+<script>
+  // ── LESSONS DATA ──
+  const lessons = [
+    {
+      title: "🔐 Нууц үг аюулгүй байдал",
+      content: `
+        <p>Нууц үг бол таны цахим хаалга. Хэрэв нууц үг нь сул байвал хакерууд амархан нэвтэрч мэдэж болно.</p>
+        <h4>Хүчтэй нууц үгийн шинж</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">✅</span>Наймаас дээш тэмдэгт байх</li>
+          <li><span class="tip-icon">✅</span>Том, жижиг үсэг, тоо, тэмдэгт хольсон байх</li>
+          <li><span class="tip-icon">✅</span>Нэр, төрсөн он сар ашиглахгүй байх</li>
+          <li><span class="tip-icon">❌</span>"123456", "password", "qwerty" зэргийг ашиглахгүй</li>
+        </ul>
+        <h4>Нууц үгээ хаана хадгалах вэ?</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">💡</span>Password manager (1Password, Bitwarden) ашигла</li>
+          <li><span class="tip-icon">💡</span>Хоёр шатлалт баталгаажуулалт идэвхжүүл</li>
+          <li><span class="tip-icon">💡</span>Платформ бүрт өөр нууц үг ашигла</li>
+        </ul>
+      `
+    },
+    {
+      title: "🎣 Фишинг гэж юу вэ?",
+      content: `
+        <p>Фишинг бол хуурамч мессеж, имэйлээр таны мэдээллийг хулгайлах арга. "Та хожлоо!", "Нууц үгээ шинэчил!" гэх мэт.</p>
+        <h4>Фишинг мессежийн шинж тэмдэг</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">🚩</span>Яаралтай, айлган сүрдүүлсэн агуулга</li>
+          <li><span class="tip-icon">🚩</span>Буруу, хачин домайн нэр (goog1e.com гэх мэт)</li>
+          <li><span class="tip-icon">🚩</span>Хувийн мэдээлэл асуух</li>
+          <li><span class="tip-icon">🚩</span>Алдаатай үг, найруулга</li>
+        </ul>
+        <h4>Яах вэ?</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">✅</span>Линк дээр дарахгүй байх</li>
+          <li><span class="tip-icon">✅</span>Насанд хүрэгчдэд мэдэгдэх</li>
+          <li><span class="tip-icon">✅</span>Мессежийг устгах</li>
+        </ul>
+      `
+    },
+    {
+      title: "🕵️ Хувийн мэдээлэл хамгаалах",
+      content: `
+        <p>Хувийн мэдээлэл гэдэгт нэр, хаяг, утасны дугаар, сургуулийн нэр, байршил зэрэг орно. Эдгээрийг цахимд хэзээ ч нийтлэх хэрэггүй.</p>
+        <h4>Хамгаалах ёстой мэдээлэл</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">🔒</span>Гэрийн хаяг, байршил</li>
+          <li><span class="tip-icon">🔒</span>Утасны дугаар</li>
+          <li><span class="tip-icon">🔒</span>Сургуулийн нэр, ангийн дугаар</li>
+          <li><span class="tip-icon">🔒</span>Гэр бүлийн мэдээлэл</li>
+          <li><span class="tip-icon">🔒</span>Нууц үг, PIN код</li>
+        </ul>
+        <h4>Privacy тохиргоо хийх</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">⚙️</span>Профайлаа "хувийн" горимд тохируул</li>
+          <li><span class="tip-icon">⚙️</span>Байршлын мэдээлэл хуваалцахгүй</li>
+          <li><span class="tip-icon">⚙️</span>Танихгүй хүний найзлах хүсэлтийг хүлээж авахгүй</li>
+        </ul>
+      `
+    },
+    {
+      title: "💬 Цахим харилцааны дүрэм",
+      content: `
+        <p>Цахим орчинд бусадтай харилцахдаа биечлэн уулзаж байгаа юм шиг эелдэг, хариуцлагатай байх хэрэгтэй.</p>
+        <h4>Нетикетийн үндсэн дүрмүүд</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">😊</span>Бусдыг хүндэтгэсэн үгс ашигла</li>
+          <li><span class="tip-icon">🤔</span>Бичихийн өмнө бодоорой — устгасан ч мөр үлдэнэ</li>
+          <li><span class="tip-icon">🚫</span>Хорт, гомдоосох сэтгэгдэл бичихгүй</li>
+          <li><span class="tip-icon">📸</span>Бусдын зургийг зөвшөөрөлгүй тараахгүй</li>
+          <li><span class="tip-icon">🔇</span>Маргалдаж байгаа хэлэлцүүлгэд зогс</li>
+        </ul>
+      `
+    },
+    {
+      title: "📱 Социал медиа аюулгүй байдал",
+      content: `
+        <p>Социал медиа хэрэглэхдээ хувийн мэдээллээ хамгаалж, аюулгүй байх нь чухал.</p>
+        <h4>Instagram / TikTok аюулгүй ашиглах</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">🔒</span>Аккаунтаа private болго</li>
+          <li><span class="tip-icon">🚫</span>Танихгүй хүний дагагчийг хүлээж авахгүй</li>
+          <li><span class="tip-icon">📍</span>Байршлын тэмдэглэл хийхгүй</li>
+          <li><span class="tip-icon">💬</span>Танихгүй хүнтэй DM-ээр ярихгүй</li>
+          <li><span class="tip-icon">🆘</span>Аюулыг report хий, block хий</li>
+        </ul>
+      `
+    },
+    {
+      title: "🆘 Тусламж хэрхэн хүсэх вэ?",
+      content: `
+        <p>Аюулд орвол дангаараа тэвчихгүй, тусламж хүсэх нь хамгийн зоригтой үйлдэл!</p>
+        <h4>Хэнд хэлэх вэ?</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">👪</span>Эцэг эх, асран хамгаалагч</li>
+          <li><span class="tip-icon">🏫</span>Сургуулийн багш, зөвлөх</li>
+          <li><span class="tip-icon">👮</span>Цагдаагийн байгууллага (102)</li>
+          <li><span class="tip-icon">📞</span>Хүүхдийн утас: 108</li>
+        </ul>
+        <h4>Нотолгоо цуглуул</h4>
+        <ul class="tip-list">
+          <li><span class="tip-icon">📸</span>Хорт мессеж, зургийн скриншот ав</li>
+          <li><span class="tip-icon">🗓️</span>Огноо, цагийг тэмдэглэ</li>
+          <li><span class="tip-icon">❌</span>Хариу бичихгүй, дарамтлагчийг block хий</li>
+        </ul>
+      `
+    }
+  ];
+
+  const completed = new Set();
+
+  function openLesson(idx) {
+    const l = lessons[idx];
+    document.getElementById('modalTitle').textContent = l.title;
+    document.getElementById('modalBody').innerHTML = l.content + `
+      <button class="modal-done-btn" onclick="completeLesson(${idx})">✅ Дуусгасан!</button>
+    `;
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+
+  function completeLesson(idx) {
+    completed.add(idx);
+    document.getElementById('card-' + idx).classList.add('done');
+    updateProgress();
+    closeModalDirect();
+  }
+
+  function updateProgress() {
+    const pct = Math.round((completed.size / lessons.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
+  function closeModalDirect() { document.getElementById('modalOverlay').classList.remove('open'); }
+
+  // ── TABS ──
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+    if (name === 'quiz') initQuiz();
+  }
+
+  // ── QUIZ ──
+  const questions = [
+    { q: "Аль нь хүчтэй нууц үг вэ?", opts: ["12345678", "Нэр+төрсөн он", "T@khi3!mN#9", "password"], ans: 2, fb: "Том жижиг үсэг, тоо, тэмдэгт хольсон нууц үг хамгийн найдвартай!" },
+    { q: "Танихгүй хүн таны нууц үгийг асуувал та юу хийх вэ?", opts: ["Хэлнэ", "Хэлэхгүй, насанд хүрэгчдэд мэдэгдэнэ", "Хуурамч нууц үг хэлнэ", "Хариу бичихгүй орхино"], ans: 1, fb: "Зөв! Нууц үгийг хэнд ч хэлэхгүй, насанд хүрэгчдэд заавал мэдэгдэнэ." },
+    { q: "Фишинг мессежийн шинж тэмдэг аль нь вэ?", opts: ["Сайн найзаасаа ирсэн мессеж", "Яаралтай 'та хожлоо' гэсэн мессеж", "Сургуулийн имэйл", "Эцэг эхийн мессеж"], ans: 1, fb: "Яаралтай, хожлоо гэх мэт мессеж нь фишингийн гол шинж тэмдэг!" },
+    { q: "Социал медиад профайлаа хэрхэн тохируулах вэ?", opts: ["Бүгдэд нээлттэй", "Зөвхөн найзуудад харагдах", "Бүгдэд нүүр зураггүй", "Байршилтайгаа"], ans: 1, fb: "Privacy тохиргоогоо заавал 'зөвхөн найзууд' болгоорой!" },
+    { q: "Кибер дээрэлхлэлтэд өртвөл эхлэж юу хийх вэ?", opts: ["Ганцаараа шийдэх", "Хариу дарамт хийх", "Эцэг эх, багшид мэдэгдэх", "Аккаунтаа устгах"], ans: 2, fb: "Зөв! Ганцаараа биш, насанд хүрэгчдэд заавал мэдэгд." }
+  ];
+
+  let qIdx = 0, score = 0, answered = false;
+
+  function initQuiz() {
+    qIdx = 0; score = 0;
+    document.getElementById('quizMain').style.display = 'block';
+    document.getElementById('quizResult').classList.remove('show');
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = questions[qIdx];
+    answered = false;
+
+    // progress dots
+    let dots = '';
+    for (let i = 0; i < questions.length; i++) {
+      let cls = i < qIdx ? 'done' : i === qIdx ? 'current' : '';
+      dots += `<div class="qp-dot ${cls}"></div>`;
+    }
+    document.getElementById('quizProgress').innerHTML = dots;
+    document.getElementById('quizQ').textContent = (qIdx + 1) + '. ' + q.q;
+
+    const letters = ['A', 'B', 'C', 'D'];
+    document.getElementById('quizOpts').innerHTML = q.opts.map((o, i) =>
+      `<div class="quiz-opt" onclick="answerQ(${i})" id="opt-${i}">
+        <div class="quiz-opt-letter">${letters[i]}</div>${o}
+      </div>`
+    ).join('');
+
+    document.getElementById('quizFeedback').className = 'quiz-feedback';
+    document.getElementById('quizFeedback').textContent = '';
+    document.getElementById('quizNext').style.display = 'none';
+  }
+
+  function answerQ(i) {
+    if (answered) return;
+    answered = true;
+    const q = questions[qIdx];
+    const opts = document.querySelectorAll('.quiz-opt');
+    opts[i].classList.add(i === q.ans ? 'correct' : 'wrong');
+    opts[q.ans].classList.add('correct');
+    if (i === q.ans) score++;
+
+    const fb = document.getElementById('quizFeedback');
+    fb.className = 'quiz-feedback ' + (i === q.ans ? 'correct' : 'wrong');
+    fb.textContent = (i === q.ans ? '✅ ' : '❌ ') + q.fb;
+
+    document.getElementById('quizNext').style.display = 'block';
+    document.getElementById('quizNext').textContent = qIdx < questions.length - 1 ? 'Дараагийн асуулт →' : '📊 Үр дүн харах';
+  }
+
+  function nextQuestion() {
+    qIdx++;
+    if (qIdx < questions.length) { renderQuestion(); return; }
+    document.getElementById('quizMain').style.display = 'none';
+    const r = document.getElementById('quizResult');
+    r.classList.add('show');
+    document.getElementById('scoreNum').textContent = score + '/' + questions.length;
+    const msgs = [
+      ['Дахин оролдоорой 💪', 'Хичээлүүдийг дахин үзээрэй.'],
+      ['Сайн байна! 👍', 'Цааш суралцаарай.'],
+      ['Маш сайн! 🌟', 'Ихэнх зүйлийг мэдэж байна.'],
+      ['Гайхалтай! 🏆', 'Та кибер аюулгүй байдлын мэргэжилтэн!']
+    ];
+    const tier = score <= 1 ? 0 : score <= 2 ? 1 : score <= 3 ? 2 : 3;
+    document.getElementById('scoreMsg').textContent = msgs[tier][0];
+    document.getElementById('scoreDesc').textContent = msgs[tier][1];
+  }
+
+  function resetQuiz() { initQuiz(); }
+
+  // Init progress bar animation
+  window.addEventListener('load', () => {
+    setTimeout(() => updateProgress(), 300);
+  });
+</script>
+</body>
+</html>

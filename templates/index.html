@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Цахимд Найз Байя</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --teal: #2bbfa4;
+      --teal-dark: #1fa08a;
+      --orange: #f47c3c;
+      --orange-light: #ff9a5c;
+      --yellow: #ffd166;
+      --blue: #4a90d9;
+      --purple: #7c5cbf;
+      --light-bg: #f0faf8;
+      --white: #ffffff;
+      --text: #2d3436;
+      --muted: #636e72;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--light-bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+
+    .nav-logo-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 18px;
+      color: var(--teal-dark);
+      line-height: 1.1;
+    }
+
+    .nav-logo-text span { display: block; font-size: 11px; color: var(--muted); font-family: 'Nunito', sans-serif; font-weight: 600; }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      transition: all .2s;
+      letter-spacing: .3px;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      background: var(--teal);
+      color: white;
+    }
+
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+    .btn-search {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .btn-join {
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .btn-join:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      min-height: 520px;
+      padding: 60px 80px;
+      background: linear-gradient(135deg, #e8faf7 0%, #fff8f0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(43,191,164,.1) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      border-radius: 50%;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(43,191,164,.15);
+      color: var(--teal-dark);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: .5px;
+    }
+
+    .hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 58px;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .highlight { color: var(--teal); }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 420px;
+    }
+
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--teal);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all .25s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(43,191,164,.35); }
+
+    .btn-secondary {
+      background: white;
+      color: var(--teal);
+      border: 2px solid var(--teal);
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all .25s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover { background: var(--teal); color: white; transform: translateY(-2px); }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-illustration {
+      width: 400px;
+      height: 380px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--blue) 100%);
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(43,191,164,.3);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    .hero-illustration::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 48px;
+      border: 3px dashed rgba(43,191,164,.3);
+    }
+
+    .floating-badge {
+      position: absolute;
+      background: white;
+      border-radius: 14px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .floating-badge.badge-1 { top: 20px; left: -20px; animation-delay: .5s; color: var(--teal-dark); }
+    .floating-badge.badge-2 { bottom: 40px; right: -20px; animation-delay: 1s; color: var(--orange); }
+    .floating-badge.badge-3 { top: 50%; left: -40px; animation-delay: 1.5s; color: var(--purple); }
+
+    /* ── STATS ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: var(--teal);
+      padding: 30px 60px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0 50px;
+      border-right: 1px solid rgba(255,255,255,.25);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 36px;
+      color: white;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,.8);
+      font-weight: 600;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 70px 80px; }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(43,191,164,.12);
+      color: var(--teal-dark);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 36px;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    /* ── CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      transition: all .25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.1); }
+
+    .card-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    .card-icon.teal   { background: rgba(43,191,164,.15); }
+    .card-icon.orange { background: rgba(244,124,60,.15); }
+    .card-icon.purple { background: rgba(124,92,191,.15); }
+    .card-icon.blue   { background: rgba(74,144,217,.15); }
+    .card-icon.yellow { background: rgba(255,209,102,.2); }
+
+    .card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 13px;
+      text-decoration: none;
+      transition: gap .2s;
+    }
+
+    .card-link:hover { gap: 10px; }
+
+    /* ── BULLYING SECTION ── */
+    .bullying-section {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 32px;
+      margin: 0 60px;
+      padding: 60px;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .bullying-section .section-tag { background: rgba(255,255,255,.1); color: #a0e9d8; }
+    .bullying-section .section-title { color: white; }
+    .bullying-section .section-desc { color: rgba(255,255,255,.7); }
+
+    .bullying-types {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .bully-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: all .2s;
+    }
+
+    .bully-card:hover { background: rgba(43,191,164,.15); border-color: var(--teal); }
+
+    .bully-card .icon { font-size: 32px; margin-bottom: 10px; display: block; }
+    .bully-card h4 { font-family: 'Fredoka One', cursive; font-size: 16px; margin-bottom: 6px; }
+    .bully-card p { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.5; }
+
+    /* ── FRIEND TEST ── */
+    .test-section {
+      background: linear-gradient(135deg, #fff8f0 0%, #fff0e8 100%);
+    }
+
+    .test-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: 0 8px 40px rgba(244,124,60,.12);
+    }
+
+    .test-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .test-header .emoji { font-size: 56px; margin-bottom: 12px; display: block; }
+    .test-header h2 { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--orange); }
+    .test-header p { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+    .test-questions { display: none; }
+    .test-questions.active { display: block; }
+
+    .question-block { margin-bottom: 28px; }
+
+    .question-text {
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .options { display: flex; flex-direction: column; gap: 10px; }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 2px solid #f0f0f0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .option-label:hover { border-color: var(--orange); background: rgba(244,124,60,.04); }
+    .option-label input { display: none; }
+    .option-label.selected { border-color: var(--orange); background: rgba(244,124,60,.08); color: var(--orange); }
+
+    .option-dot {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      flex-shrink: 0;
+      transition: all .2s;
+    }
+
+    .option-label.selected .option-dot {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .test-start-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all .25s;
+    }
+
+    .test-start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(244,124,60,.35); }
+
+    .test-result {
+      display: none;
+      text-align: center;
+      animation: fadeIn .4s ease;
+    }
+
+    .test-result.show { display: block; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .result-emoji { font-size: 64px; margin-bottom: 12px; display: block; }
+    .result-type { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--orange); margin-bottom: 16px; }
+    .result-strengths { display: flex; gap: 10px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+    .strength-badge { background: rgba(43,191,164,.12); color: var(--teal-dark); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; }
+    .result-advice { background: #fff8f0; border-radius: 14px; padding: 16px 20px; font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 16px; }
+
+    /* ── CHAT WALL ── */
+    .chat-section { background: white; }
+
+    .chat-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .chat-box {
+      background: var(--light-bg);
+      border-radius: 24px;
+      padding: 24px;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-right: 4px;
+    }
+
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+
+    .chat-msg {
+      display: flex;
+      gap: 10px;
+      animation: fadeIn .3s ease;
+    }
+
+    .chat-msg.user { flex-direction: row-reverse; }
+
+    .chat-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .chat-avatar.ai   { background: linear-gradient(135deg, var(--teal), var(--blue)); }
+    .chat-avatar.user { background: var(--orange); }
+
+    .chat-bubble {
+      max-width: 75%;
+      padding: 11px 16px;
+      border-radius: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .chat-msg.ai   .chat-bubble { background: white; border-top-left-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+    .chat-msg.user .chat-bubble { background: var(--teal); color: white; border-top-right-radius: 4px; }
+
+    .chat-input-area {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: white;
+      border: 2px solid #e8e8e8;
+      border-radius: 14px;
+      padding: 11px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: border-color .2s;
+      font-weight: 600;
+    }
+
+    .chat-input:focus { border-color: var(--teal); }
+
+    .chat-send {
+      background: var(--teal);
+      border: none;
+      border-radius: 12px;
+      width: 44px; height: 44px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all .2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .chat-send:hover { background: var(--teal-dark); transform: scale(1.05); }
+
+    .typing { display: flex; gap: 4px; padding: 4px 0; }
+    .typing span { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: bounce 1.2s infinite; }
+    .typing span:nth-child(2) { animation-delay: .2s; }
+    .typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes bounce { 0%,80%,100% { transform: scale(.7); opacity: .4; } 40% { transform: scale(1); opacity: 1; } }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1a2e;
+      color: white;
+      padding: 50px 80px 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand h3 { font-family: 'Fredoka One', cursive; font-size: 22px; margin-bottom: 10px; color: var(--teal); }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.7; }
+
+    .footer-col h4 { font-size: 13px; font-weight: 800; color: rgba(255,255,255,.5); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .footer-col a { display: block; color: rgba(255,255,255,.7); font-size: 13px; font-weight: 600; text-decoration: none; margin-bottom: 10px; transition: color .2s; }
+    .footer-col a:hover { color: var(--teal); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(255,255,255,.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 40px 24px; }
+      .hero-visual { display: none; }
+      .hero h1 { font-size: 36px; }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 50px 24px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .bullying-section { margin: 0 20px; padding: 40px 24px; grid-template-columns: 1fr; }
+      .chat-container { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats { flex-wrap: wrap; padding: 20px; }
+      .stat-item { border-right: none; padding: 10px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">🤝</div>
+    <div class="nav-logo-text">
+      Цахимд Найз Байя
+      <span>Web-based Capstone Project</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/" class="active">Нүүр</a></li>
+    <li><a href="/learn">Мэдлэг</a></li>
+    <li><a href="/bullying">Кибер дээрэлхлэлт</a></li>
+    <li><a href="/action">Хамтдаа чадна</a></li>
+    <li><a href="/blog">Блог</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-search">🔍</button>
+    <button class="btn-join">Бүртгүүлэх</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">✨ Аюулгүй цахим орчин</div>
+    <h1>Цахимд<br><span class="highlight">Найз Байя!</span></h1>
+    <p>Зөрөг, аюулгүй цахим орчныг хамтдаа бүтээцгээе. Кибер дээрэлхлэлтийг таних, урьдчилан сэргийлэх мэдлэгтэй болоорой.</p>
+    <div class="hero-btns">
+      <a href="/learn" class="btn-primary">📚 Судлах</a>
+      <a href="/action" class="btn-secondary">🤝 Элсэх</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-illustration">🌐
+      <div class="floating-badge badge-1">💬 Найрсаг харилцаа</div>
+      <div class="floating-badge badge-2">🛡️ Аюулгүй байдал</div>
+      <div class="floating-badge badge-3">❤️ Хамтын дэмжлэг</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <span class="stat-num">1,200+</span>
+    <span class="stat-label">Идэвхтэй гишүүд</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">85%</span>
+    <span class="stat-label">Мэдлэг нэмэгдсэн</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">50+</span>
+    <span class="stat-label">Сургуулиуд</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">24/7</span>
+    <span class="stat-label">AI туслагч</span>
+  </div>
+</div>
+
+<!-- LEARN CARDS -->
+<section>
+  <div class="section-tag">МЭДЛЭГ ОЛГОХ</div>
+  <h2 class="section-title">Юу сурах вэ?</h2>
+  <p class="section-desc">Цахим орчинд аюулгүй байх, найрсаг харилцаа тогтоох мэдлэг олж авна.</p>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon teal">🌐</div>
+      <h3>Цахим орчны дүрэм</h3>
+      <p>Интернетэд аюулгүй, хариуцлагатай байх арга замыг сурна. Хувийн мэдээллээ хэрхэн хамгаалах вэ?</p>
+      <a href="/learn" class="card-link">Дэлгэрэнгүй →</a>
+    </div>
+    <div class="card">
+      <div class="card-icon orange">🛡️</div>
+      <h3>Кибер дээрэлхлэлт</h3>
+      <p>Кибер дээрэлхлэлтийг хэрхэн таних, яаж тусламж хүсэх вэ? Зөв арга замыг олж мэд.</p>
+      <a href="/bullying" class="card-link">Дэлгэрэнгүй →</a>
+    </div>
+    <div class="card">
+      <div class="card-icon purple">📖</div>
+      <h3>Блог & Нийтлэл</h3>
+      <p>Найзуудын туршлага, зөвлөгөө, сонирхолтой нийтлэлүүдийг уншина уу.</p>
+      <a href="/blog" class="card-link">Дэлгэрэнгүй →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BULLYING SECTION -->
+<div class="bullying-section">
+  <div>
+    <div class="section-tag">КИБЕР ДЭЭРЭЛХЛЭЛТ</div>
+    <h2 class="section-title">Таних нь чухал</h2>
+    <p class="section-desc">Кибер дээрэлхлэлт олон хэлбэртэй. Тус бүрийг таньж, хэрхэн хариу арга хэмжээ авах талаар мэдэж ав.</p>
+    <a href="/bullying" class="btn-primary" style="width:fit-content">Дэлгэрэнгүй мэдэх →</a>
+  </div>
+  <div class="bullying-types">
+    <div class="bully-card">
+      <span class="icon">💬</span>
+      <h4>Текст</h4>
+      <p>Хорт мессеж, зүхэл</p>
+    </div>
+    <div class="bully-card">
+      <span class="icon">📸</span>
+      <h4>Зураг/Видео</h4>
+      <p>Зөвшөөрөлгүй тараах</p>
+    </div>
+    <div class="bully-card">
+      <span class="icon">🚫</span>
+      <h4>Тусгаарлах</h4>
+      <p>Бүлгээс хөөх</p>
+    </div>
+    <div class="bully-card">
+      <span class="icon">😈</span>
+      <h4>Дуурайх</h4>
+      <p>Хуурамч профайл</p>
+    </div>
+  </div>
+</div>
+
+<!-- FRIEND TEST -->
+<section class="test-section">
+  <div style="text-align:center; margin-bottom:40px;">
+    <div class="section-tag">ШИЙДЭЛ / ИНТЕРАКТИВ</div>
+    <h2 class="section-title">Би ямар найз бэ?</h2>
+    <p class="section-desc" style="margin:0 auto;">Тестийг бөглөж, найзын чадварыг нь тодорхойл. Claude AI шинжилгээ хийнэ!</p>
+  </div>
+  <div class="test-container">
+    <div class="test-header">
+      <span class="emoji">🤔</span>
+      <h2>Найзын тест</h2>
+      <p>5 асуулт бөглөж, үр дүнгээ мэд</p>
+    </div>
+
+    <div id="testStart">
+      <button class="test-start-btn" onclick="startTest()">✨ Тест эхлэх</button>
+    </div>
+
+    <div class="test-questions" id="testQuestions">
+      <div class="question-block">
+        <div class="question-text">1. Найз чинь гунигтай байвал та юу хийдэг вэ?</div>
+        <div class="options">
+          <label class="option-label" onclick="selectOption(this, 0, 0)"><input type="radio" name="q0"><div class="option-dot"></div>Тэр дороо очиж тусалдаг</label>
+          <label class="option-label" onclick="selectOption(this, 0, 1)"><input type="radio" name="q0"><div class="option-dot"></div>Мессеж бичиж байдлыг нь асуудаг</label>
+          <label class="option-label" onclick="selectOption(this, 0, 2)"><input type="radio" name="q0"><div class="option-dot"></div>Тэр ярихыг хүлээдэг</label>
+        </div>
+      </div>
+      <div class="question-block">
+        <div class="question-text">2. Найзынхаа нууцыг хэн нэгэн асуувал?</div>
+        <div class="options">
+          <label class="option-label" onclick="selectOption(this, 1, 0)"><input type="radio" name="q1"><div class="option-dot"></div>Хэзээ ч хэлдэггүй</label>
+          <label class="option-label" onclick="selectOption(this, 1, 1)"><input type="radio" name="q1"><div class="option-dot"></div>Заримдаа хэлчихдэг</label>
+          <label class="option-label" onclick="selectOption(this, 1, 2)"><input type="radio" name="q1"><div class="option-dot"></div>Найзаасаа зөвшөөрөл авдаг</label>
+        </div>
+      </div>
+      <div class="question-block">
+        <div class="question-text">3. Найзтайгаа маргалдвал та?</div>
+        <div class="options">
+          <label class="option-label" onclick="selectOption(this, 2, 0)"><input type="radio" name="q2"><div class="option-dot"></div>Уучлалт гуйж эвлэрдэг</label>
+          <label class="option-label" onclick="selectOption(this, 2, 1)"><input type="radio" name="q2"><div class="option-dot"></div>Хэсэг хугацаа хүлээдэг</label>
+          <label class="option-label" onclick="selectOption(this, 2, 2)"><input type="radio" name="q2"><div class="option-dot"></div>Тэр уучлалт гуйхыг хүлээдэг</label>
+        </div>
+      </div>
+      <div class="question-block">
+        <div class="question-text">4. Найз чинь онлайн дарамтанд өртвөл?</div>
+        <div class="options">
+          <label class="option-label" onclick="selectOption(this, 3, 0)"><input type="radio" name="q3"><div class="option-dot"></div>Насанд хүрэгчдэд мэдэгдэхэд туслана</label>
+          <label class="option-label" onclick="selectOption(this, 3, 1)"><input type="radio" name="q3"><div class="option-dot"></div>Сэтгэлийн дэмжлэг үзүүлнэ</label>
+          <label class="option-label" onclick="selectOption(this, 3, 2)"><input type="radio" name="q3"><div class="option-dot"></div>Юу хийхээ мэдэхгүй байна</label>
+        </div>
+      </div>
+      <div class="question-block">
+        <div class="question-text">5. Найзынхаа амжилтыг харвал та?</div>
+        <div class="options">
+          <label class="option-label" onclick="selectOption(this, 4, 0)"><input type="radio" name="q4"><div class="option-dot"></div>Чин сэтгэлээсээ баярладаг</label>
+          <label class="option-label" onclick="selectOption(this, 4, 1)"><input type="radio" name="q4"><div class="option-dot"></div>Баярлаж урамшуулдаг</label>
+          <label class="option-label" onclick="selectOption(this, 4, 2)"><input type="radio" name="q4"><div class="option-dot"></div>Харьцуулж бодогддог</label>
+        </div>
+      </div>
+      <button class="test-start-btn" style="margin-top:10px" onclick="submitTest()" id="submitBtn" disabled>🔍 Дүн мэдэх</button>
+    </div>
+
+    <div class="test-result" id="testResult">
+      <span class="result-emoji" id="resEmoji">🌟</span>
+      <div class="result-type" id="resType">Халуун дотно найз</div>
+      <div class="result-strengths" id="resStrengths"></div>
+      <div class="result-advice" id="resAdvice"></div>
+      <button class="test-start-btn" style="margin-top:20px" onclick="resetTest()">🔄 Дахин өгөх</button>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT WALL -->
+<section class="chat-section">
+  <div class="chat-container">
+    <div>
+      <div class="section-tag">ЗӨВ СЭТГЭЛДИЙН ХАНА</div>
+      <h2 class="section-title">AI Найз туслагч</h2>
+      <p class="section-desc">Кибер аюулгүй байдал, найрсаг харилцааны талаар асуугаарай. Claude AI монгол хэлээр хариулна!</p>
+      <div style="display:flex; flex-direction:column; gap:12px; margin-top:24px;">
+        <div style="background:#f0faf8; border-radius:14px; padding:14px 18px; font-size:13px; font-weight:700; color:var(--teal-dark); cursor:pointer" onclick="quickChat('Кибер дээрэлхлэлтэд өртвөл юу хийх вэ?')">💬 Кибер дээрэлхлэлтэд өртвөл?</div>
+        <div style="background:#fff8f0; border-radius:14px; padding:14px 18px; font-size:13px; font-weight:700; color:var(--orange); cursor:pointer" onclick="quickChat('Цахимд аюулгүй байх зөвлөгөө өгнө үү')">🛡️ Аюулгүй байх зөвлөгөө</div>
+        <div style="background:#f5f0ff; border-radius:14px; padding:14px 18px; font-size:13px; font-weight:700; color:var(--purple); cursor:pointer" onclick="quickChat('Найзтайгаа хэрхэн зөв харилцах вэ?')">❤️ Найзтай зөв харилцах</div>
+      </div>
+    </div>
+    <div class="chat-box">
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg ai">
+          <div class="chat-avatar ai">🤖</div>
+          <div class="chat-bubble">Сайн байна уу! Би таны AI найз туслагч. Кибер аюулгүй байдал, найрсаг харилцааны талаар асуу! 😊</div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input class="chat-input" id="chatInput" placeholder="Асуултаа бичнэ үү..." onkeydown="if(event.key==='Enter') sendChat()"/>
+        <button class="chat-send" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>🤝 Цахимд Найз Байя</h3>
+      <p>Аюулгүй, найрсаг цахим орчин бүтээхэд хамтдаа зүтгэцгээе. Кибер дээрэлхлэлтгүй орчин хүн бүрд хамаатай.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Холбоос</h4>
+      <a href="/">Нүүр</a>
+      <a href="/learn">Мэдлэг</a>
+      <a href="/bullying">Кибер дээрэлхлэлт</a>
+      <a href="/action">Хамтдаа чадна</a>
+    </div>
+    <div class="footer-col">
+      <h4>Нөөц</h4>
+      <a href="/blog">Блог</a>
+      <a href="#">Тест</a>
+      <a href="#">AI туслагч</a>
+    </div>
+    <div class="footer-col">
+      <h4>Холбоо барих</h4>
+      <a href="#">Имэйл бичих</a>
+      <a href="#">Багийн тухай</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Цахимд Найз Байя. Бүх эрх хуулиар хамгаалагдсан.</span>
+    <span>Capstone Project 🇲🇳</span>
+  </div>
+</footer>
+
+<script>
+  // ── FRIEND TEST ──
+  const answers = new Array(5).fill(null);
+
+  function startTest() {
+    document.getElementById('testStart').style.display = 'none';
+    document.getElementById('testQuestions').classList.add('active');
+  }
+
+  function selectOption(label, qIdx, aIdx) {
+    const group = label.closest('.options');
+    group.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+    label.classList.add('selected');
+    answers[qIdx] = aIdx;
+    if (answers.every(a => a !== null)) {
+      document.getElementById('submitBtn').disabled = false;
+    }
+  }
+
+  async function submitTest() {
+    document.getElementById('submitBtn').textContent = '⏳ Шинжилж байна...';
+    document.getElementById('submitBtn').disabled = true;
+
+    try {
+      const res = await fetch('/api/friend-test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ answers })
+      });
+      const data = await res.json();
+
+      document.getElementById('testQuestions').classList.remove('active');
+      document.getElementById('testResult').classList.add('show');
+
+      const emojis = ['🌟', '💫', '🦁', '🌈', '❤️'];
+      document.getElementById('resEmoji').textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.getElementById('resType').textContent = data.type;
+      document.getElementById('resAdvice').textContent = '💡 ' + data.advice;
+
+      const strengthsEl = document.getElementById('resStrengths');
+      strengthsEl.innerHTML = '';
+      (data.strengths || []).forEach(s => {
+        const span = document.createElement('span');
+        span.className = 'strength-badge';
+        span.textContent = '✓ ' + s;
+        strengthsEl.appendChild(span);
+      });
+    } catch (e) {
+      alert('Алдаа гарлаа. Дахин оролдоно уу.');
+      document.getElementById('submitBtn').disabled = false;
+      document.getElementById('submitBtn').textContent = '🔍 Дүн мэдэх';
+    }
+  }
+
+  function resetTest() {
+    answers.fill(null);
+    document.getElementById('testResult').classList.remove('show');
+    document.getElementById('testStart').style.display = 'block';
+    document.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('submitBtn').textContent = '🔍 Дүн мэдэх';
+  }
+
+  // ── CHAT ──
+  let chatHistory = [];
+  let chatLoading = false;
+
+  function quickChat(text) {
+    document.getElementById('chatInput').value = text;
+    sendChat();
+  }
+
+  async function sendChat() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text || chatLoading) return;
+
+    chatLoading = true;
+    input.value = '';
+    addChatMsg('user', text);
+    chatHistory.push({ role: 'user', content: text });
+
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-msg ai';
+    typingDiv.innerHTML = '<div class="chat-avatar ai">🤖</div><div class="chat-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+    document.getElementById('chatMessages').appendChild(typingDiv);
+    scrollChat();
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory })
+      });
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let aiText = '';
+      const bubble = typingDiv.querySelector('.chat-bubble');
+      bubble.innerHTML = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const lines = decoder.decode(value).split('\n');
+        for (const line of lines) {
+          if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+            try {
+              aiText += JSON.parse(line.slice(6)).text;
+              bubble.textContent = aiText;
+              scrollChat();
+            } catch {}
+          }
+        }
+      }
+      chatHistory.push({ role: 'assistant', content: aiText });
+    } catch {
+      typingDiv.querySelector('.chat-bubble').textContent = '❌ Алдаа гарлаа.';
+    }
+
+    chatLoading = false;
+  }
+
+  function addChatMsg(role, text) {
+    const el = document.createElement('div');
+    el.className = `chat-msg ${role}`;
+    el.innerHTML = `<div class="chat-avatar ${role}">${role === 'ai' ? '🤖' : '👤'}</div><div class="chat-bubble">${text}</div>`;
+    document.getElementById('chatMessages').appendChild(el);
+    scrollChat();
+  }
+
+  function scrollChat() {
+    const el = document.getElementById('chatMessages');
+    el.scrollTop = el.scrollHeight;
+  }
+</script>
+</body>
+</html>
